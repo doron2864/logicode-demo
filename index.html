@@ -176,9 +176,6 @@
     transition: none !important;
     z-index: 10;
   }
-  .screenshot-card.pop-left {
-    transform-origin: 20% 35%;
-  }
 
   .screenshot-card .card-toolbar {
     background: #e8e8e8;
@@ -215,7 +212,8 @@
     top: 0; left: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
+    object-position: top right;
     background: #fff;
     opacity: 0;
     transition: none;
@@ -429,7 +427,7 @@
     <p>המפעיל רואה רק מה שהוא צריך — בחירה והדפסה</p>
   </div>
   <div class="split">
-    <div class="screenshot-card pop-left">
+    <div class="screenshot-card">
       <div class="card-toolbar">
         <span class="dot-red"></span>
         <span class="dot-yellow"></span>
@@ -470,7 +468,7 @@
       </ul>
       <p>במקום לגלול ברשימה ארוכה, פשוט מתחילים להקליד. התוצאות מתעדכנות מיד — חוסך זמן יקר בקו הייצור.</p>
     </div>
-    <div class="screenshot-card pop-left">
+    <div class="screenshot-card">
       <div class="card-toolbar">
         <span class="dot-red"></span>
         <span class="dot-yellow"></span>
