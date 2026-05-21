@@ -154,10 +154,26 @@
     box-shadow: 0 4px 24px rgba(0,0,0,0.08);
     overflow: hidden;
     transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    z-index: 1;
   }
   .screenshot-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+  }
+
+  /* ── Card pop — zoom-in-zoom effect ── */
+  @keyframes cardPop {
+    0%   { transform: scale(1); box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+    25%  { transform: scale(1); box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+    40%  { transform: scale(1.45); box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+    75%  { transform: scale(1.45); box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+    90%  { transform: scale(1); box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+    100% { transform: scale(1); box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+  }
+  .screenshot-card.card-popping {
+    animation: cardPop 7s ease-in-out forwards;
+    z-index: 10;
   }
 
   .screenshot-card .card-toolbar {
@@ -576,20 +592,30 @@
       if (e.isIntersecting) {
         e.target.classList.add('visible');
 
+        const card = e.target.querySelector('.screenshot-card');
+
         // Image-swap sections (1+2): replay on each scroll-in
         const zoomedImg = e.target.querySelector('.img-swap .img-zoomed');
         if (zoomedImg) {
           zoomedImg.classList.remove('swapping');
+          if (card) card.classList.remove('card-popping');
           void zoomedImg.offsetWidth;
-          setTimeout(() => zoomedImg.classList.add('swapping'), 1000);
+          setTimeout(() => {
+            zoomedImg.classList.add('swapping');
+            if (card) card.classList.add('card-popping');
+          }, 1000);
         }
 
         // CSS-zoom sections (3+4): replay on each scroll-in
         const zoomImg = e.target.querySelector('.img-zoom-wrap img');
         if (zoomImg) {
           zoomImg.classList.remove('zooming');
+          if (card) card.classList.remove('card-popping');
           void zoomImg.offsetWidth;
-          setTimeout(() => zoomImg.classList.add('zooming'), 800);
+          setTimeout(() => {
+            zoomImg.classList.add('zooming');
+            if (card) card.classList.add('card-popping');
+          }, 800);
         }
       }
     });
