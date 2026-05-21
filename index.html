@@ -568,20 +568,24 @@
       if (e.isIntersecting) {
         e.target.classList.add('visible');
 
-        // Image-swap sections (1+2)
+        // Image-swap sections (1+2): replay on each scroll-in
         const zoomedImg = e.target.querySelector('.img-swap .img-zoomed');
-        if (zoomedImg && !zoomedImg.classList.contains('swapping')) {
+        if (zoomedImg) {
+          zoomedImg.classList.remove('swapping');
+          void zoomedImg.offsetWidth;
           setTimeout(() => zoomedImg.classList.add('swapping'), 1000);
         }
 
-        // CSS-zoom sections (3+4)
+        // CSS-zoom sections (3+4): replay on each scroll-in
         const zoomImg = e.target.querySelector('.img-zoom-wrap img');
-        if (zoomImg && !zoomImg.classList.contains('zooming')) {
+        if (zoomImg) {
+          zoomImg.classList.remove('zooming');
+          void zoomImg.offsetWidth;
           setTimeout(() => zoomImg.classList.add('zooming'), 800);
         }
       }
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.25 });
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 </script>
 
