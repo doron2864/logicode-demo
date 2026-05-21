@@ -188,46 +188,42 @@
     width: 100%;
     display: block;
     will-change: transform;
-    transition: none;
   }
 
-  /* Each screenshot has a unique zoom keyframe */
-  @keyframes zoomMain {
-    0%   { transform: scale(1); transform-origin: 70% 20%; }
-    25%  { transform: scale(1); transform-origin: 70% 20%; }
-    50%  { transform: scale(2.2); transform-origin: 70% 20%; }
-    75%  { transform: scale(2.2); transform-origin: 70% 20%; }
-    100% { transform: scale(1); transform-origin: 70% 20%; }
+  /* transform-origin set on element (NOT inside keyframes — mobile compat) */
+  .zoom-main img    { transform-origin: 30% 20%; }
+  .zoom-search img  { transform-origin: 45% 6%; }
+  .zoom-preview img { transform-origin: 55% 55%; }
+  .zoom-journal img { transform-origin: 50% 48%; }
+
+  @keyframes zoom22 {
+    0%   { transform: scale(1); }
+    25%  { transform: scale(1); }
+    55%  { transform: scale(2.2); }
+    75%  { transform: scale(2.2); }
+    100% { transform: scale(1); }
   }
 
-  @keyframes zoomSearch {
-    0%   { transform: scale(1); transform-origin: 55% 8%; }
-    25%  { transform: scale(1); transform-origin: 55% 8%; }
-    50%  { transform: scale(2.8); transform-origin: 55% 8%; }
-    75%  { transform: scale(2.8); transform-origin: 55% 8%; }
-    100% { transform: scale(1); transform-origin: 55% 8%; }
+  @keyframes zoom30 {
+    0%   { transform: scale(1); }
+    25%  { transform: scale(1); }
+    55%  { transform: scale(3.0); }
+    75%  { transform: scale(3.0); }
+    100% { transform: scale(1); }
   }
 
-  @keyframes zoomPreview {
-    0%   { transform: scale(1); transform-origin: 55% 55%; }
-    25%  { transform: scale(1); transform-origin: 55% 55%; }
-    50%  { transform: scale(2.0); transform-origin: 55% 55%; }
-    75%  { transform: scale(2.0); transform-origin: 55% 55%; }
-    100% { transform: scale(1); transform-origin: 55% 55%; }
+  @keyframes zoom20 {
+    0%   { transform: scale(1); }
+    25%  { transform: scale(1); }
+    55%  { transform: scale(2.0); }
+    75%  { transform: scale(2.0); }
+    100% { transform: scale(1); }
   }
 
-  @keyframes zoomJournal {
-    0%   { transform: scale(1); transform-origin: 50% 48%; }
-    25%  { transform: scale(1); transform-origin: 50% 48%; }
-    50%  { transform: scale(2.0); transform-origin: 50% 48%; }
-    75%  { transform: scale(2.0); transform-origin: 50% 48%; }
-    100% { transform: scale(1); transform-origin: 50% 48%; }
-  }
-
-  .zoom-main img.zooming    { animation: zoomMain 7s ease-in-out forwards; }
-  .zoom-search img.zooming  { animation: zoomSearch 7s ease-in-out forwards; }
-  .zoom-preview img.zooming { animation: zoomPreview 7s ease-in-out forwards; }
-  .zoom-journal img.zooming { animation: zoomJournal 7s ease-in-out forwards; }
+  .zoom-main img.zooming    { animation: zoom22 7s ease-in-out forwards; }
+  .zoom-search img.zooming  { animation: zoom30 7s ease-in-out forwards; }
+  .zoom-preview img.zooming { animation: zoom20 7s ease-in-out forwards; }
+  .zoom-journal img.zooming { animation: zoom20 7s ease-in-out forwards; }
 
   .card-caption {
     padding: 1.2rem 1.5rem;
